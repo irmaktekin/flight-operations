@@ -34,8 +34,8 @@ public class FlightServiceImpl implements FlightService {
         flight.setFlightNumber(flightCreateRequestDTO.getFlightNumber());
         flight.setDepartureTerminal(flightCreateRequestDTO.getDepartureTerminal());
         flight.setArrivalTerminal(flightCreateRequestDTO.getArrivalTerminal());
-        flight.setDepartureTime(LocalDateTime.parse(flightCreateRequestDTO.getDepartureTime()));
-        flight.setArrivalTime(LocalDateTime.parse(flightCreateRequestDTO.getArrivalTime()));
+        flight.setDepartureTime((flightCreateRequestDTO.getDepartureTime()));
+        flight.setArrivalTime(flightCreateRequestDTO.getArrivalTime());
         flight.setPrice(flightCreateRequestDTO.getPrice());
         log.info("Flight is created.Flight ID:{}" ,flight.getId());
         return mapper.toConvert(flight);
@@ -72,8 +72,8 @@ public class FlightServiceImpl implements FlightService {
                         flight.getFlightNumber(),
                         flight.getDepartureTerminal(),
                         flight.getArrivalTerminal(),
-                        flight.getDepartureTime().format(formatter),
-                        flight.getArrivalTime().format(formatter),
+                        flight.getDepartureTime(),
+                        flight.getArrivalTime(),
                         flight.getPrice()
                 ))
                 .collect(Collectors.toList());

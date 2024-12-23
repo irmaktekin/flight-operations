@@ -6,6 +6,7 @@ import irmak.tekin.flight.management.dto.request.FlightCreateRequestDTO;
 import irmak.tekin.flight.management.dto.request.FlightUpdateRequestDTO;
 import irmak.tekin.flight.management.dto.response.FlightResponseDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -25,6 +26,10 @@ public class FlightController {
     @PostMapping
     public ResponseEntity<FlightResponseDTO> addFlight(@Validated @RequestBody FlightCreateRequestDTO flightCreateRequestDTO){
         FlightResponseDTO flightResponseDTO = flightService.addFlight(flightCreateRequestDTO);
+        if (flightCreateRequestDTO == null) {
+            throw new IllegalArgumentException("FlightCreateRequestDTO cannot be null");
+        }
+        //
         return new ResponseEntity<>(flightResponseDTO, HttpStatus.CREATED);
     }
     @DeleteMapping("/{id}")

@@ -5,6 +5,7 @@ import irmak.tekin.flight.management.service.SeatService;
 import irmak.tekin.flight.management.dto.request.SeatCreateRequestDTO;
 import irmak.tekin.flight.management.dto.request.SeatUpdateRequestDTO;
 import irmak.tekin.flight.management.dto.response.SeatResponseDTO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,15 +14,10 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/seats")
-
+@RequiredArgsConstructor
 public class SeatController {
     private final SeatService seatService;
-
-    @Autowired
-    public SeatController(SeatService seatService) {
-        this.seatService = seatService;
-    }
-
+    
     @PostMapping
     public ResponseEntity<SeatResponseDTO> addFlight(@Validated @RequestBody SeatCreateRequestDTO seatCreateRequestDTO){
         SeatResponseDTO seatResponseDTO = seatService.addSeat(seatCreateRequestDTO);
